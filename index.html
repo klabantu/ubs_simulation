@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UBS Access App - Agent Simulation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #fff;
+      color: #222;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .ubs-header {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+      margin-bottom: 2.5rem;
+    }
+    .ubs-logo {
+      display: block;
+      width: 133px;
+      height: 48px;
+      background: url('ubs_logo.png') no-repeat center;
+      background-size: contain;
+      margin-bottom: 10px;
+    }
+    .ubs-title {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #e4002b;
+      letter-spacing: 0.5px;
+      margin-top: 8px;
+    }
+    .agent-box {
+      background: #f8f8f8;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      padding: 2.5rem 2.5rem 2rem 2.5rem;
+      min-width: 340px;
+      text-align: center;
+    }
+    .btn {
+      color: #fff;
+      padding: 15px 25px;
+      background-color: #38D2D2;
+      background-image: radial-gradient(93% 87% at 87% 89%, rgba(0, 0, 0, 0.23) 0%, transparent 86.18%), radial-gradient(66% 66% at 26% 20%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 69.79%, rgba(255, 255, 255, 0) 100%);
+      box-shadow: inset -3px -3px 9px rgba(255, 255, 255, 0.25), inset 0px 3px 9px rgba(255, 255, 255, 0.3), inset 0px 1px 1px rgba(255, 255, 255, 0.6), inset 0px -8px 36px rgba(0, 0, 0, 0.3), inset 0px 1px 5px rgba(255, 255, 255, 0.6), 2px 19px 31px rgba(0, 0, 0, 0.2);
+      border-radius: 14px;
+      font-weight: bold;
+      font-size: 16px;
+      border: 0;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn:hover {
+      background: #27bcbc;
+    }
+    .waiting {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      color: #e4002b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+    }
+    .spinner {
+      width: 22px;
+      height: 22px;
+      border: 3px solid #e4002b;
+      border-top: 3px solid #fff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      margin-right: 0.5rem;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .success {
+      margin-top: 2rem;
+      color: #1b883a;
+      font-size: 1.2rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+    }
+    .checkmark {
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="ubs-header">
+    <span class="ubs-logo"></span>
+    <span class="ubs-title">Access App - Agent Portal</span>
+  </div>
+  <div class="agent-box" id="agentBox">
+    <div id="step-welcome">
+      <h2>Welcome, UBS Agent</h2>
+      <p>To identify your customer, please request authentication via the Access App.</p>
+      <button class="btn" id="requestBtn">Request Customer Identification</button>
+    </div>
+    <div id="step-waiting" style="display:none;">
+      <div class="waiting">
+        <span class="spinner"></span>
+        Waiting for customer identification…
+      </div>
+    </div>
+    <div id="step-success" style="display:none;">
+      <div class="success">
+        <span class="checkmark">✔️</span>
+        Customer successfully identified!
+      </div>
+    </div>
+  </div>
+  <script>
+    const requestBtn = document.getElementById('requestBtn');
+    const stepWelcome = document.getElementById('step-welcome');
+    const stepWaiting = document.getElementById('step-waiting');
+    const stepSuccess = document.getElementById('step-success');
+
+    requestBtn.onclick = function() {
+      stepWelcome.style.display = 'none';
+      stepWaiting.style.display = 'block';
+      // Automatically simulate identification after 3 seconds
+      setTimeout(function() {
+        stepWaiting.style.display = 'none';
+        stepSuccess.style.display = 'block';
+      }, 3000);
+    };
+  </script>
+</body>
+</html>
